@@ -30,8 +30,8 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'dotnetapp'
+    azureSubscription: 'azrm-con'
     appType: 'webApp'
     appName: 'dotnet-appv1'
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
