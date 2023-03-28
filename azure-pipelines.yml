@@ -44,8 +44,8 @@ stages:
     - task: AzureWebApp@1
       displayName: 'Deploy App to Azure App Service'
       inputs:
-        azureSubscription: 'my-svc'
+        azureSubscription: '<Your-Azure-Subscription-Name>'
+        appName: '<Your-Azure-App-Service-Name>'
         appType: 'webApp'
-        appName: 'dotnetappv2'
         package: '$(Pipeline.Workspace)/drop/**/*.zip'
         deploymentMethod: 'auto'
