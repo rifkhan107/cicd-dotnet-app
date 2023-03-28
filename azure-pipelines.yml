@@ -32,6 +32,6 @@ steps:
   inputs:
     azureSubscription: 'my-svc'
     appType: 'webApp'
-    appName: 'dotnet-appv1'
+    appName: 'dotnetappv2'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
     deploymentMethod: 'auto'
