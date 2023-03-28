@@ -18,10 +18,10 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish_output'
     zipAfterPublish: True
 
-- task: PublishBuildArtifacts@1
+- task: PublishPipelineArtifact@1
   inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)/publish_output'
-    artifactName: 'webapp'
+    targetPath: '$(Build.ArtifactStagingDirectory)/publish_output'
+    artifact: 'webapp'
 
 - task: AzureWebApp@1
   inputs:
