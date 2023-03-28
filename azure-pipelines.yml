@@ -30,7 +30,7 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'Azure for Students(1)(240696f4-b8aa-4704-8bed-ba13ebb423e2)'
+    azureSubscription: 'dotnetapp'
     appType: 'webApp'
     appName: 'dotnet-appv1'
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
