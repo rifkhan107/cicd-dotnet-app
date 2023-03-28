@@ -13,6 +13,14 @@ stages:
     pool:
       vmImage: 'windows-latest'
     steps:
+    - task: Cache@2
+      inputs:
+        key: 'nuget | "$(Agent.OS)" | **/packages.lock.json,!**/bin/**,!**/obj/**'
+        restoreKeys: |
+          nuget | "$(Agent.OS)"
+        path: '$(Pipeline.Workspace)/.nuget/packages'
+      displayName: 'Cache NuGet packages'
+
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: 'dotnet build $(buildConfiguration)'
 
@@ -29,6 +37,7 @@ stages:
         pathtoPublish: '$(Build.ArtifactStagingDirectory)'
         artifactName: 'drop'
         publishLocation: 'Container'
+
 
 - stage: Deploy
   displayName: 'Deploy to Azure App Service'
