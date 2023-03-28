@@ -42,11 +42,22 @@ stages:
     - download: current
       artifact: drop
 
-    - task: AzureWebApp@1
-      displayName: 'Deploy App to Azure App Service'
+    # - task: AzureWebApp@1
+    #   displayName: 'Deploy App to Azure App Service'
+    #   inputs:
+    #     azureSubscription: 'my-svc'
+    #     appType: 'webApp'
+    #     appName: 'dotnetappv2'
+    #     package: '$(Pipeline.Workspace)/drop/**/*.zip'
+    #     deploymentMethod: 'auto'
+    - task: PowerShell@2
+      displayName: 'Deploy multiple zip files'
       inputs:
-        azureSubscription: 'my-svc'
-        appType: 'webApp'
-        appName: 'dotnetappv2'
-        package: '$(Pipeline.Workspace)/drop/**/*.zip'
-        deploymentMethod: 'auto'
+        targetType: 'inline'
+        script: |
+          $zipFiles = Get-ChildItem -Path "$(Pipeline.Workspace)/drop" -Filter *.zip
+          foreach ($zipFile in $zipFiles) {
+            Write-Host "Deploying $($zipFile.Name)"
+            Invoke-Expression -Command "az webapp deployment source config-zip --resource-group dotnetapp_group --name dotnetappv2 --src $($zipFile.FullName)"
+          }
+        pwsh: true
