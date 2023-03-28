@@ -30,5 +30,5 @@ steps:
     azureSubscription: 'my-svc'
     appType: 'webApp'
     appName: 'dotnetappv2'
-    package: '$(Pipeline.Workspace)/webapp/**/*.zip'
+    package: '$(Build.ArtifactStagingDirectory)/*.zip'
     deploymentMethod: 'auto'
