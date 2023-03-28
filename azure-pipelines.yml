@@ -23,10 +23,12 @@ steps:
     targetPath: '$(Build.ArtifactStagingDirectory)/publish_output'
     artifact: 'webapp'
 
+- task: PublishBuildArtifacts@1
+
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'my-svc'
     appType: 'webApp'
     appName: 'dotnetappv2'
-    package: $(Build.ArtifactStagingDirectory)/*.zip
+    package: '$(Pipeline.Workspace)/webapp/**/*.zip'
     deploymentMethod: 'auto'
