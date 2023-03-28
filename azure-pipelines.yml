@@ -30,7 +30,7 @@ steps:
 
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'azrm-con'
+    azureSubscription: 'my-svc'
     appType: 'webApp'
     appName: 'dotnet-appv1'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip'
